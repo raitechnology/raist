@@ -236,7 +236,7 @@ $(dependd)/depend.make: $(dependd) $(all_depends)
 	@cat $(all_depends) >> $(dependd)/depend.make
 
 .PHONY: dist_bins
-dist_bins: $(all_libs) $(bind)/gc_server
+dist_bins: $(all_libs) $(all_dlls) $(bind)/gc_server
 	chrpath -d $(libd)/libraist.so
 	chrpath -d $(bind)/gc_server
 
