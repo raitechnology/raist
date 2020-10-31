@@ -16,15 +16,21 @@ BuildRequires:  raikv
 BuildRequires:  raimd
 BuildRequires:  libdecnumber
 BuildRequires:  pcre2-devel
+BuildRequires:  openssl-devel
+BuildRequires:  git-core
+BuildRequires:  liblzf-devel
+BuildRequires:  systemd
 Requires:       raikv
 Requires:       raimd
 Requires:       libdecnumber
 Requires:       pcre2
+Requires:       openssl
+Requires:       liblzf
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
 %description
-Rai Cache protocol
+Rai backing store
 
 %prep
 %setup -q
