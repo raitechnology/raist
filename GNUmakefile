@@ -170,7 +170,7 @@ libraist_dbjs  := $(addprefix $(objd)/, $(addsuffix .fpic.o, $(libraist_files)))
 libraist_deps  := $(addprefix $(dependd)/, $(addsuffix .d, $(libraist_files))) \
                   $(addprefix $(dependd)/, $(addsuffix .fpic.d, $(libraist_files)))
 libraist_dlnk  := $(dlnk_lib)
-libraist_spec  := $(version)-$(build_num)
+libraist_spec  := $(version)-$(build_num)_$(git_hash)
 libraist_ver   := $(major_num).$(minor_num)
 
 $(libd)/libraist.a: $(libraist_objs)
