@@ -54,7 +54,7 @@ EvGc::create_gc( EvPoll &p,  uint64_t scan_time ) noexcept
     printf( "failed to add gc\n" );
     return NULL;
   }
-  p.add_timer_micros( pfd, GC_TIMER_USECS, g->timer_id, 0 );
+  p.timer.add_timer_micros( pfd, GC_TIMER_USECS, g->timer_id, 0 );
   return g;
 }
 
