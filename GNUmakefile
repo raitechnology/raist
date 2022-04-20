@@ -113,7 +113,7 @@ endif
 
 raist_lib := $(libd)/libraist.a
 rpath       := -Wl,-rpath,$(pwd)/$(libd)$(rpath1)$(rpath2)$(rpath3)$(rpath4)$(rpath5)$(rpath6)$(rpath7)
-dlnk_lib    += -lpcre2-8 -lcrypto
+dlnk_lib    += -lpcre2-8
 malloc_lib  :=
 
 .PHONY: everything
