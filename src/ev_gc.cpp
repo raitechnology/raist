@@ -23,19 +23,19 @@ static const uint64_t GC_TIMER_USECS = 300;
 
 EvGc::EvGc( EvPoll &p,  uint64_t scan_time ) noexcept
     : EvSocket( p, p.register_type( "gc" ) ),
-      kctx( *p.map, p.dbx_id, NULL ),
+      kctx( *p.sub_route.map, p.sub_route.dbx_id, NULL ),
       scan_pos( 0 ), gc_time( 0 ), gc_cnt( 0 ), start_time( 0 ), ten_ns( 0 ),
       verbose( 1 )
 {
   this->timer_id   = (uint64_t) this->sock_type << 56;
   this->start_time = current_monotonic_time_ns();
-  this->scan_cnt   = p.map->hdr.ht_size /
+  this->scan_cnt   = p.sub_route.map->hdr.ht_size /
                      ( scan_time / ( GC_TIMER_USECS * (uint64_t) 1000 ) ) + 1;
   this->kctx.set( KEYCTX_IS_GC_ACQUIRE | KEYCTX_NO_COPY_ON_READ |
                   KEYCTX_IS_CUCKOO_ACQUIRE );
   for ( int i = 0; i < 256; i++ )
     this->db_to_dbx_id[ i ] = KV_NO_DBSTAT_ID;
-  this->db_to_dbx_id[ this->kctx.db_num ] = p.dbx_id;
+  this->db_to_dbx_id[ this->kctx.db_num ] = p.sub_route.dbx_id;
 }
 
 EvGc *

@@ -18,9 +18,13 @@ libd      := $(build_dir)/lib64
 objd      := $(build_dir)/obj
 dependd   := $(build_dir)/dep
 
+default_cflags := -ggdb -O3
 # use 'make port_extra=-g' for debug build
 ifeq (-g,$(findstring -g,$(port_extra)))
-  DEBUG = true
+  default_cflags := -ggdb
+endif
+ifeq (-a,$(findstring -a,$(port_extra)))
+  default_cflags := -fsanitize=address -ggdb -O3
 endif
 
 CC          ?= gcc
@@ -40,11 +44,6 @@ gcc_wflags  := -Wall -Wextra -Werror
 fpicflags   := -fPIC
 soflag      := -shared
 
-ifdef DEBUG
-default_cflags := -ggdb
-else
-default_cflags := -ggdb -O3 -Ofast
-endif
 # rpmbuild uses RPM_OPT_FLAGS
 CFLAGS := $(default_cflags)
 #RPM_OPT_FLAGS ?= $(default_cflags)
@@ -131,6 +130,8 @@ $(kv_lib) $(kv_dll):
 clean_kv:
 	$(MAKE) -C raikv clean
 clean_subs += clean_kv
+update_submod_kv:
+	git update-index --cacheinfo 160000 `cd ./raikv && git rev-parse HEAD` raikv
 endif
 ifeq (yes,$(have_dec_submodule))
 $(dec_lib) $(dec_dll):
@@ -147,6 +148,8 @@ $(md_lib) $(md_dll):
 clean_md:
 	$(MAKE) -C raimd clean
 clean_subs += clean_md
+update_submod_md:
+	git update-index --cacheinfo 160000 `cd ./raimd && git rev-parse HEAD` raimd
 endif
 
 # copr/fedora build (with version env vars)

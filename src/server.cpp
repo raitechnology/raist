@@ -155,7 +155,7 @@ main( int argc, const char *argv[] )
 
   if ( shm.attach( 0 ) != 0 ||       /* attach to db */
        poll.init( 5, false ) != 0 || /* init epoll */
-       poll.init_shm( shm ) != 0 )   /* init kv pubsub */
+       poll.sub_route.init_shm( shm ) != 0 )   /* init kv pubsub */
     status = 1;
   /* create gc and start timer */
   if ( status == 0 && (gc = EvGc::create_gc( poll, scan_time )) == NULL )
