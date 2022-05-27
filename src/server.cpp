@@ -145,7 +145,7 @@ main( int argc, const char *argv[] )
 
   Monitor       svr( *map, stats_ival, check_ival );
   EvPoll        poll;
-  EvShm         shm( map );
+  EvShm         shm( "st_server", map );
   SignalHandler sighndl;
   EvGc        * gc = NULL;
   char          junk[ 8 ];

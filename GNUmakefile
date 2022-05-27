@@ -184,16 +184,16 @@ all_dlls    += $(libd)/libraist.so
 all_depends += $(libraist_deps)
 
 server_defines := -DRAIDS_VER=$(ver_build)
-gc_server_files := server
-gc_server_objs  := $(addprefix $(objd)/, $(addsuffix .o, $(gc_server_files)))
-gc_server_deps  := $(addprefix $(dependd)/, $(addsuffix .d, $(gc_server_files)))
-gc_server_libs  := $(raist_lib)
-gc_server_lnk   := $(raist_lib) $(lnk_lib) -lpcre2-8
+st_server_files := server
+st_server_objs  := $(addprefix $(objd)/, $(addsuffix .o, $(st_server_files)))
+st_server_deps  := $(addprefix $(dependd)/, $(addsuffix .d, $(st_server_files)))
+st_server_libs  := $(raist_lib)
+st_server_lnk   := $(raist_lib) $(lnk_lib) -lpcre2-8
 
-$(bind)/gc_server: $(gc_server_objs) $(gc_server_libs) $(lnk_dep)
+$(bind)/st_server: $(st_server_objs) $(st_server_libs) $(lnk_dep)
 
-all_exes    += $(bind)/gc_server
-all_depends += $(gc_server_deps)
+all_exes    += $(bind)/st_server
+all_depends += $(st_server_deps)
 
 all_dirs := $(bind) $(libd) $(objd) $(dependd)
 
@@ -239,9 +239,9 @@ $(dependd)/depend.make: $(dependd) $(all_depends)
 	@cat $(all_depends) >> $(dependd)/depend.make
 
 .PHONY: dist_bins
-dist_bins: $(all_libs) $(all_dlls) $(bind)/gc_server
+dist_bins: $(all_libs) $(all_dlls) $(bind)/st_server
 	chrpath -d $(libd)/libraist.so
-	chrpath -d $(bind)/gc_server
+	chrpath -d $(bind)/st_server
 
 .PHONY: dist_rpm
 dist_rpm: srpm
