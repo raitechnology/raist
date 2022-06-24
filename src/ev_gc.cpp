@@ -48,7 +48,7 @@ EvGc::create_gc( EvPoll &p,  uint64_t scan_time ) noexcept
   }
   EvGc * g = new ( m ) EvGc( p, scan_time );
   int pfd = p.get_null_fd();
-  g->PeerData::init_peer( pfd, NULL, "gc" );
+  g->PeerData::init_peer( pfd, -1, NULL, "gc" );
   g->sock_opts = kv::OPT_NO_POLL | kv::OPT_NO_CLOSE;
   if ( p.add_sock( g ) < 0 ) {
     printf( "failed to add gc\n" );
