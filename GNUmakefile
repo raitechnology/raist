@@ -188,7 +188,7 @@ st_server_files := server
 st_server_objs  := $(addprefix $(objd)/, $(addsuffix .o, $(st_server_files)))
 st_server_deps  := $(addprefix $(dependd)/, $(addsuffix .d, $(st_server_files)))
 st_server_libs  := $(raist_lib)
-st_server_lnk   := $(raist_lib) $(lnk_lib) -lpcre2-8
+st_server_lnk   := $(raist_lib) $(lnk_lib) -lcares -lpcre2-8
 
 $(bind)/st_server: $(st_server_objs) $(st_server_libs) $(lnk_dep)
 
